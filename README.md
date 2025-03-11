@@ -12,34 +12,35 @@ java 개발자 과정 Database 리포지토리
     - 가장 유명한 것이 Oracle
     - 사용자는 SQL로 요청, DB서버는 처리결과를 테이블로 리턴    
 - Oracle 설치(Docker)
-    1. powershell 오픈
-    2. pull 내려받기
+    1. Powershell 오픈
+    2. docker search로 다운하고 싶은 이미지 검색색
+    3. pull 내려받기
         ```shell
         PS C:\Users\Admin> docker pull oracleinanutshell/oracle-xe-11g
         
         ```
-    3. 다운로드 이미지 확인
+    4. 다운로드 이미지 확인
         ```shell
         PS C:\Users\Admin> docker image ls
         REPOSITORY                        TAG       IMAGE ID       CREATED        SIZE
         pkmj                              1.1       4e8a935999f3   24 hours ago   1.66GB
         oracleinanutshell/oracle-xe-11g   latest    8b740e77d4b9   6 years ago    2.79GB
         ```
-    4. 도커 컨테이너 실행
+    5. 도커 컨테이너 실행
         ```shell
         PS C:\Users\Admin> docker run --name oracle11g -d -p 1521:1521 --restart=always oracleinanutshell/oracle-xe-11g
         ```
         - 1521 : 오라클 기본 포트
         - 아이디 system / oracle
-    5. 도커 실행확인
+    6. 도커 실행확인
         - Docker Desktop > Containers 확인
-    6. Powershell 오픈
+    7. Powershell 오픈
         ```shell
         > docker exec -it oracle11g bash
         [oracle@5b981cdfc286 ~]$ sqlplus / as sysdba
         SQL> 
         ```
-    7. DBeaver 접속
+    8. DBeaver 접속
         - Connection > Select your DB > Oracle 선택
 
         <img src='./image/db001.png' width='650'>
@@ -51,12 +52,12 @@ java 개발자 과정 Database 리포지토리
         - 프로그래밍언어와 차이 - 어떻게(How)
         - SQL - 무엇(What)
     - SQL의 구성요소 3가지
-    - DDL(Data Definition Lang) - 데이터베이스 생성, 테이블 생성, 객체 생성, 수정, 삭제
-        - CREATE, ALTER DROP ...
-    - DML(Data Control Lang) - 사용자 권한 부여, 해제, 트랜젝션 시작/종료
-        - GRANT, REVOKE, BEGIN TRANS, COMMIT, ROLLBACK
-    - DCL(Data Manupulation Lang) - 데이터 조작언어(핵심!), 데이터 삽입,조회,수정,삭제
-        - INSERT, SELECT UPDATE, DELETE
+        - DDL(Data Definition Lang) - 데이터베이스 생성, 테이블 생성, 객체 생성, 수정, 삭제
+            - CREATE, ALTER DROP ...
+        - **DML**(Data Control Lang) - 사용자 권한 부여, 해제, 트랜젝션 시작/종료
+            - GRANT, REVOKE, BEGIN TRANS, COMMIT, ROLLBACK
+        - DCL(Data Manupulation Lang) - 데이터 조작언어(핵심!), 데이터 삽입,조회,수정,삭제
+            - `INSERT`, `SELECT` ,`UPDATE`, `DELETE`
 - SELECT 기본
     - 데이터 조회 시 사용하는 기본명령어
         ```sql
@@ -78,6 +79,6 @@ java 개발자 과정 Database 리포지토리
         4. ORDER BY 정렬
         5. 집합
 - 함수(내장함수)
-    - 문자함수
+    - 문자함수: [SQL](./day01/sql02_함수.sql)
     - 숫자함수
 ## 2일차
