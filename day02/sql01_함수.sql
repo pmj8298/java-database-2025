@@ -94,6 +94,78 @@ SELECT to_char(sysdate + INTERVAL '9' HOUR, 'yyyy-mm-dd hh24:mi:ss') AS seoul_ti
 	   to_char(sysdate + INTERVAL '9' YEAR, 'yyyy-mm-dd hh24:mi:ss')                -- 2034-03-12 02:25:39
 	FROM DUAL;
 
+/*
+ * 형변환 함수
+ * */
+-- TO_CHAR()
+-- 숫자형을 문자형으로 변경
+SELECT 1234 AS 원본,
+	   to_char(12345,'9999999') AS "원본+두자리빈자리", --    12345
+	   to_char(12345,'0999999') AS "원본+두자리0",    --  0012345 
+	   to_char(12345,'$99999') AS "통화단위+원본",    --  $12345
+	   to_char(12345,'99999.99') AS "소수점",       --  12345.00
+	   to_char(12345,'99,999') AS "천단위쉼표"       --  12,345	   
+	FROM dual;
+
+-- TO_NUMBER() 문자형된 데이터를 숫자로
+SELECT '5.0' * 5,
+	   to_number('5.0') AS 숫자형변환
+	   -- to_number('Hello) 숫자로 변경할 수 없는 형태
+	FROM dual;
+
+-- TO_DATE() 날짜형태를 문자형으로
+SELECT '2025-03-12',
+		to_date('2025-03-12') + 10 -- 2025-03-22 00:00:00.000 / 날짜를 문자형으로 바꾸면 연산이 가능해짐
+	FROM dual;
+
+/*
+ * 일반함수
+ * */
+-- NVL(컬럼|데이터, 바꿀값) 널값을 다른값으로 치환
+SELECT commission_pct,
+	   nvl(commission_pct, 0.0)
+	FROM employees;
+
+SELECT nvl(hire_date, sysdate) -- 입사일자가 비어있으면 오늘날짜로 대체
+	FROM employees;
+
+-- NVL2(컬럼|데이터, 널이 아닐대 처리, 널일때 처리할 부분)
+SELECT commission_pct,
+	   salary,
+	   nvl2(commission_pct, salary + (salary * commission_pct), salary) AS 커미션급여
+	FROM employees;
+
+-- DECODE(A,B,'1','2') A가 B일 경우 1 아니면 2
+-- 오라클만 있는 함수
+SELECT email, phone_number, job_id,
+	   decode(job_id, 'IT_PROG', '개발자만세', '개발자외') AS 캐치프레이즈
+	FROM employees;
+--  WHERE job_id = 'IT_PROG';
+  
+/*
+ * CASE 구문, 정말 중요!
+ * if, elif
+ * */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
