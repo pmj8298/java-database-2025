@@ -144,12 +144,44 @@ SELECT email, phone_number, job_id,
   
 /*
  * CASE 구문, 정말 중요!
- * if, elif
+ * if, elif의 중복된 구문과 유사
  * */
+SELECT CASE employee_id WHEN 100 THEN '사장'
+						WHEN 101 THEN '부사장'
+						WHEN 102 THEN '부사장'
+	   END,
+	   employee_id,
+	   job_id
+	FROM employees;
 
+SELECT CASE job_id WHEN 'AD_PRES' THEN '사장'
+				   WHEN 'AD_VP'   THEN '부사장'
+				   WHEN 'IT_PROG' THEN '프로그래머'
+				   WHEN 'SA_MAN'  THEN '영업사원'
+				   ELSE '미분류'
+	   END AS 직급,
+	   employee_id,
+	   job_id
+	FROM employees;
 
+/*
+ * 정규식(Regula Expression) - 문자열 패턴을 가지고, 동일한 패턴 데이터 추출 사용
+ * ^, $, ., *, [], [^] 패턴인식할때 필요한 키워드
+ * */
+SELECT *
+	FROM employees
+  WHERE phone_number LIKE '%.%.%'; -- 세,네자리 전화번호가 구분이 안감
 
+  -- 전화번호가 .로 구분되는 세자리 전화번호만 필터링
+  -- '[1-9]{6}-[1-9]{7}' : 주민번호 패턴
+SELECT *
+	FROM employees
+  WHERE REGEXP_LIKE(phone_number, '[1-9]{3}.[1-9]{3}.[1-9]{4}');
 
+-- first_name이 J로 시작하고, 두번째 글자가 a나 o인 사람을 출력하시오
+SELECT *
+	FROM employees
+  WHERE REGEXP_LIKE(first_name, '^J[a|o]');
 
 
 
