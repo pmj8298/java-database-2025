@@ -48,6 +48,72 @@ SELECT E.EMPLOYEE_ID,E.FIRST_NAME || ' ' || E.LAST_NAME AS FULL_NAME, E.EMAIL, E
 	AND L.LOCATION_ID  = D.LOCATION_ID
 	AND D.DEPARTMENT_ID = 60;
 
+-- ANSI 표준은 오라클방식보다 복잡.
+SELECT e.employee_id, e.first_name || ' ' || e.last_name AS "full_name"
+     , e.email, e.phone_number
+     , e.hire_date, e.job_id
+     , d.DEPARTMENT_ID
+     , d.department_name
+     , l.city, l.STATE_PROVINCE, l.STREET_ADDRESS
+  FROM employees e
+ INNER JOIN departments d
+    ON e.department_id = d.department_id
+ INNER JOIN locations l
+    ON l.location_id = d.location_id
+ WHERE d.department_id = 60;
+
+-- 외부조인
+-- 보통 PK 와 FK 간의 일치하는 조건의 데이터를 찾는 것 - 내부조인 
+-- PK 와 FK 간의 일치하지 않는 조건의 데이터도 찾는 것 - 외부조인 
+-- 테이블1 OUTER JOIN 테이블2
+-- 테이블 1번을 기준으로 외부조인 LEFT OUTER JOIN
+-- 테이블 2번을 기준으로 외부조인 RIGHT OUTER JOIN
+
+-- ANSI 표준문법
+-- EMPLOYEES 테이블에는 있는데 DEPARTMENTS 테이블에는 없는 데이터를 같이 출력
+SELECT *
+	FROM EMPLOYEES e 
+  LEFT OUTER JOIN DEPARTMENTS d
+  	ON e.department_id = d.department_id
+  WHERE e.department_id IS NULL;
+
+-- DEPARTMENTS 테이블에는 있는데 EMPLOYEES 테이블에는 없는 데이터를 같이 출력
+SELECT *
+	FROM EMPLOYEES e 
+  RIGHT OUTER JOIN DEPARTMENTS d
+  	ON e.department_id = d.department_id;
+
+-- ORACLE 문법
+-- (+) 만족하지 않는 조건도 더 나오게 한다는 뜻
+-- LEFT OUTER JOIN
+SELECT * 
+	FROM EMPLOYEES e , DEPARTMENTS d
+  WHERE E.DEPARTMENT_ID  = D.DEPARTMENT_ID(+);
+
+-- RIGHT OUTER JOIN
+SELECT * 
+	FROM EMPLOYEES e , DEPARTMENTS d
+  WHERE E.DEPARTMENT_ID(+)  = D.DEPARTMENT_ID;
+
+-- INNER JOIN 은 INNER 생략 가능
+-- OUTER JOIN 은 LEFT와 RIGHT 생략 가능
+
+-- SELF JOIN : 자기 자신을 주번 사용하는 JOIN
+SELECT E1.EMPLOYEE_ID, E1.FIRST_NAME || ' ' || E1.LAST_NAME AS FULL_EMP_NAME, E1.JOB_ID, E1.MANAGER_ID, 
+	   E2.FIRST_NAME || ' ' || E2.LAST_NAME AS FULL__MNG_NAME, E2.JOB_ID
+	FROM EMPLOYEES e1, EMPLOYEES e2
+  WHERE E2.EMPLOYEE_ID = E1.MANAGER_ID
+  ORDER BY E1.MANAGER_ID;
+
+
+
+
+
+
+
+
+
+
 
 
 
