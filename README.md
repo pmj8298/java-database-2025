@@ -155,6 +155,9 @@ java 개발자 과정 Database 리포지토리
         TRUNCATE TABLE 테이블명;
         ```
 ## 4일차
+- VS CODE DB 플러그인
+    - 확장 > DATABASE 검색 > Database Client(Weijan Chen) > 확장 중 Database 선택
+    <img src='./image/image.png'>
 - DML
     - INSERT
     - UPDATE
