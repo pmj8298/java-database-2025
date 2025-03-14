@@ -157,12 +157,46 @@ java 개발자 과정 Database 리포지토리
 ## 4일차
 - VS CODE DB 플러그인
     - 확장 > DATABASE 검색 > Database Client(Weijan Chen) > 확장 중 Database 선택
-    <img src='./image/image.png'>
+    <img src='./image/image.png' width='700'>
 - DML
-    - INSERT
-    - UPDATE
-    - DELETE
-- 제약조건
+    - INSERT - 테이블에 새로운 데이터를 삽입하는 명령
+        - 한 건식 삽입
+        ```sql
+        INSERT INTO 테이블명[(컬럼리스트)]
+        VALUES(값리스트);
+        ```
+        - 여러건 한번에 삽입
+    - UPDATE - 데이터 변경, WHERE 조건을 없이 실행하면 테이블 모든 데이커가 수정됨(주의요망)
+        ```sql
+        UPDATE 테이블명 SET
+            컬럼명 = 변경할 값,
+            컬럼명 = 변경할 값 -- 반복
+        [WHERE 조건];
+        ```
+    - DELETE - 데이터 삭제, WHERE 조건 없이 실행하면 테이블의 모든 데이터가 삭제됨(주의요망) 
+        ```sql
+        DELETE FROM 테이블명
+        [WHERE 조건];
+        ```
+- 트랜젝션
+    - 논리적인 처리단위
+    - 은행에서 돈을 찾을 때 아주 많은 테이블 접근해서 일을 처리
+        - ATM 기계 정보 테이블, 회원 테이블 비밀번호 확인, 계좌정보, 계좌 금액 테이블, 계좌 금액 입출금 내역 테이블
+        - 계좌 정보 테이블, 계좌금액입출금내역테이블 금액 빼기, ATM 기계 총지폐 정보 테이블, 영수증 관련 정보 테이블, ATM 기계 정보 테이블, 은행 로그 테이블 ...
+        - 적어도 7-8 개 이상의 테이블 접근해서 조회하고 업데이트 수행
+        - 제대로 일이 처리안되면 다시 일상복귀
+        ```sql
+        BEGIN TRANSACTION; -- 트랜젝션 시작
+        COMMIT;            -- 트랜젝션 확정
+        ROLLBACK;          -- 원상복귀귀
+        ```
+- 제약조건(CONSTRAINT)
+    - 잘못된 데이터가 들어가지 않도록 막는 기법
+    - PK       : 기본키, UNIQUE, NOT NULL, 중복되지 않고, 없어도 안됨됨
+    - FK       : 외래키, 다른 테이블 PK에 없는 값을 가져다 쓸 수 없음
+    - NOT NULL : 값이 빠지면 안됨
+    - UNIQUE   : 들어간 데이터가 중복되면 안됨
+    - CHECK    : 기준에 부합하지 않는 데이터는 입력되면 안됨
 - INDEX
 - VIEW
 - 서브쿼리
