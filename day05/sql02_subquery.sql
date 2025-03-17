@@ -161,7 +161,7 @@ SELECT B.POSITION, AVG(B.PAY)
 
 SELECT AVG(B.PAY)
   FROM EMP2 B;
-
+--========================
 -- 상호연관 쿼리로 작성
 SELECT A.NAME, A.POSITION, A.PAY
   FROM EMP2 A
