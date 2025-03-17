@@ -1,0 +1,62 @@
+/*
+ * VIEW
+ * */
+-- SYSDBA 로 실행해야함
+GRANT CREATE VIEW TO SAMPLEUSER;
+
+-- 
+SELECT * FROM EMP2;
+
+-- 뷰생성 DDL
+-- 뷰는 드랍하고 다시 생성하지 않아도 바로 수정 가능하다
+CREATE OR REPLACE VIEW V_EMP2
+AS
+	SELECT EMPNO, NAME, DEPTNO, TEL, POSITION, PEMPNO
+		FROM EMP2;
+
+
+-- 뷰로 SELECT
+SELECT *
+	FROM V_EMP2;
+
+-- 뷰로 INSERT
+-- 단, 뷰에 속하지 않는 컬럼 중 NOT NULL 조건이 있으면 데이터 삽입 불가
+INSERT INTO V_EMP2 VALUES(20000219, 'Tom Holland', 1004, '051)627-9968', 'IT Programmer', 19960303);
+
+-- NOT NULL인 DEPTNO 빼고 뷰 수정
+CREATE OR REPLACE VIEW V_EMP2
+AS
+	SELECT EMPNO, NAME, DEPTNO, TEL, POSITION, PEMPNO
+		FROM EMP2;
+
+
+-- DEPTNO 컬럼 NOT NULL 인데 뷰에는 존재하지 않아 INSERT 불가
+INSERT INTO V_EMP2 VALUES(20000219, 'Zen Daiya', '051)627-9968', 'IT Programmer', 19960303);
+COMMIT;
+
+-- CRUD 중 SELECT 만 가능하게 만들려면
+CREATE OR REPLACE VIEW V_EMP2
+AS
+	SELECT EMPNO, NAME, DEPTNO, TEL, POSITION, PEMPNO
+		FROM EMP2
+WITH READ ONLY;
+
+-- SQL Error [42399] [99999]: ORA-42399: cannot perform a DML operation on a read-only view
+INSERT INTO V_EMP2 VALUES(20000219, 'Tom Holland', 1004, '051)627-9968', 'IT Programmer', 19960303);
+
+-- 복합뷰, 조인 등으로 여러 테이블을 합쳐서 보여주는 뷰
+-- 복합뷰는 INSERT, UPDATE, DELETE 가 거의 불가
+CREATE OR REPLACE VIEW V_EMP3
+AS
+	SELECT E.EMPNO, E.NAME, E.DEPTNO, D.DNAME
+		FROM EMP2 E, DEPT2 D
+	   WHERE E.DEPTNO = D.DCODE;
+
+-- 조회
+SELECT * FROM V_EMP3;
+
+
+
+
+
+
