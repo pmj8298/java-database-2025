@@ -272,4 +272,66 @@ java 개발자 과정 Database 리포지토리
         ```
 
 ## 6일차
-- PL/SQL
+- PL/SQL - ORACLE에서 파이썬처럼 코딩
+    - 오라클에서 프로그래밍을 하기 위한 언어
+    - 기본구조
+        - 선언부(DECLARE),실행부(BEGIN~END),예외처리부(EXCEPTION) 구성
+        - ORACLE 스키마 중 PACKAGES, PROCEDURES, FUNCTION 이 PL/SQL 로 작업하는 영역
+            - 저장된(STORED) PL/SQL
+        - 결과 화면에 출력하려면 명령어를 실행하고 PL/SQL 을 수행해야함
+        ```sql
+        SET SERVEROUTPUT ON; -- 화면출력 기능 활성화
+        SHOW ERRORS;         -- 오류 상세내용 보기
+        ```
+- STORED PROCEDURE 와 FUNCTION 을 만들기 위해 사용
+    - 저장프로시저
+        - 한번에 많은 일을 수행해야할 때(TRANSACTION당 수행되는 로직들 묶어서)
+        - 예) 한번에 5개의 테이블에서 조회와 DML을 처리해야한다
+            - 쿼리를 최소 10개를 수행해야 함
+            - 프로시저 한번만 수행해서 해결할 수 있음
+        - 중대형 IT 솔루션에서는 프로시저가 거의 필수
+
+        ```sql
+        CREATE OR REPLACE FUNCTION 프로시저저명
+        (
+            PARAM1 DATATYPE,
+            PARAM2 DATATYPE,
+            ...
+        )
+        IS|AS
+        PL/SQL BLOCK;
+        /
+        ```
+        - 실행 시 EXEC 사용
+
+        ```sql
+        EXEC 프로시저명 (파라미터);
+        ```
+
+    - 함수
+        - 스칼라값을 리턴할 때 - SELECT 절 서브쿼리와 기능이 동일
+        - 개발자에게 편의성을 제공하기 위해서 만듦
+        ```sql
+        CREATE OR REPLACE FUNCTION 함수명
+        (
+            PARAM1 DATATYPE,
+            ...
+        )
+        RETURN DATATYPE
+        IS|AS
+        PL/SQL BLOCK
+        ```
+        - 실행 시 SELECT 문들 DML문과 같이 사용
+        ```sql
+        SELECT *, 함수명(PARAMETER)
+          FROM 컬럼명;
+        ```
+    - 커서
+        - DB 에서 테이블에 들어있는 데이터를 한줄씩 읽기 위해서 필요
+        ```sql
+        CURSOR 커서명 IS
+            SELECT쿼리
+        ```
+    - TRIGGER
+        - 특정 동작으로 다른 테이블에 자동으로 데이터가 변경되는 기능
+        - 한가지 동작에 대해서 연쇄적으로 다른 일 발생

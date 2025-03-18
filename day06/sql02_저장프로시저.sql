@@ -1,0 +1,38 @@
+-- PROCEDURE
+-- 부서번호가 30번인 사람들의 JOB 을 MANAGER 로 변경하는 프로시저
+-- SELECT * FROM EMP;
+CREATE OR REPLACE PROCEDURE UPDATE_30
+-- () -- 파라미터 없으면 비워도 괜찮음
+IS
+BEGIN
+		UPDATE EMP SET
+				JOB = 'MANAGER'
+		WHERE DEPTNO = 30;
+END;
+/
+
+SELECT * FROM EMP;
+
+ROLLBACK;
+
+COMMIT;
+
+-- 프로시저 실행
+CALL SAMPLEUSER.UPDATE_30;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
