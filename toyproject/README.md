@@ -20,11 +20,11 @@ PYTHON GUI - ORACLE 연동 프로그램
 
 ### PyQt5 GUI 사용
     - PyQt5 설치
-        -  콘솔 > pip install PyQt5
+        -  콘솔 `> pip install PyQt5`
     - QtDesigner 설치
         - https://build-system.fman.io/qt-designer-download 다운로드 후 설치
 
-        <img src="" width="700">
+        <img src="../image/db003.png" width="700">
 
 
 #### PyQt5 개발
@@ -34,3 +34,54 @@ PYTHON GUI - ORACLE 연동 프로그램
 4. 시그널(이벤트) 처리방법
 5. QtDesigner로 화면디자인, PyQt와 연동
     <img src="../image/db002.png" width="700">
+
+#### Oracle 연동 GUI 개발 시작
+- 오라틀 Python 연동 DB(스키마) 생성
+    ```sql
+    -- madang 스키마, 사용자 생성
+    CREATE USER madang IDENTIFIED BY madang;
+
+    -- 권한 설정
+    GRANT CONNECT, resource TO madang;
+
+    -- madang 으로 사용 스키마 변경
+
+    -- Students 테이블 생성
+    CREATE TABLE Students(
+        std_id 	    NUMBER 		  PRIMARY KEY,
+        std_name    varchar2(100) NOT NULL,
+        stg_mobile  varchar2(15)  NULL,
+        std_regyear number(4,0)   NOT null
+    );
+
+    -- Students 용 시퀀스 생성
+    CREATE SEQUENCE seq_student
+        INCREMENT BY 1		-- 숫자를 1씩 증가
+        START WITH 1;		-- 1부터 숫자가 증가됨
+        
+    COMMIT;
+    ```
+- Student 테이블 생성, 더미데이터 추가
+    ```sql
+    -- madang 로그인
+
+    -- 조회
+    SELECT * FROM students;
+
+    -- 더미데이터 삽입
+    INSERT INTO students(STD_ID, STD_NAME, stg_mobile, STD_REGYEAR)
+    VALUES (seq_student.nextval, '홍길동', '010-4562-7895', 1997);
+
+    INSERT INTO students(STD_ID, STD_NAME, stg_mobile, STD_REGYEAR)
+    VALUES (seq_student.nextval, '홍길순', '010-1235-7895', 2000);
+
+    COMMIT;
+    ```
+- Python 오라클 연동 테스트
+    - 오라클 모듈
+        - oracledb - Oracle 최신버전에 매칭
+        - **cx_Oracle** - 구버전까지 잘 됨
+        - 콘솔에서 `> pip install cx_Oracle `
+        - Microsoft C++ Build Tools 필요 https://visualstudio.microsoft.com/ko/visual-cpp-build-tools/
+- QtDesigner 로 화면 구성
+- PyQt 로 Oracle 연동 CRUD 구현
