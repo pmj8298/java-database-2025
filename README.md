@@ -343,6 +343,6 @@ java 개발자 과정 Database 리포지토리
         END;
         ```
 
-## 7일차
+## 7,8일차
 - ORACLE 연동 PYTHON GUI 프로그램 개발
     - [오라클연동](./toyproject/README.md)
