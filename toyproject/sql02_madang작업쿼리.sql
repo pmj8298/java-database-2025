@@ -16,3 +16,12 @@ SELECT std_id, std_name, stg_mobile, std_regyear FROM students;
 
 INSERT INTO MADANG.STUDENTS(std_id, std_name, stg_mobile, std_regyear)
 VALUES(seq_student.nextval, :v_std_name, :v_stg_mobile, :v_std_regyear);
+
+UPDATE MADANG.STUDENTS
+   SET std_name    = :v_std_name, 
+   	   stg_mobile  = :v_stg_mobile, 
+   	   std_regyear = :v_std_regyear
+ WHERE std_id  	   = :v_std_id
+ 
+ DELETE FROM STUDENTS
+   WHERE std_id  	   = :v_std_id

@@ -101,7 +101,7 @@ PYTHON GUI - ORACLE 연동 프로그램
     - 콘솔 테스트 결과 <br>
         <img src="../image/db004.png" width="600">
 
-- QtDesigner 로 화면 구성
+- QtDesigner 로 화면 구성 <br>
     <img src='../image/db005.png' width="750">
 
 - PyQt 로 Oracle 연동 CRUD 구현
@@ -112,9 +112,15 @@ PYTHON GUI - ORACLE 연동 프로그램
     - DML 이 종료된 수 다시 데이터 로드 로직 추가
     - 데이터 삽입 후 Line Edit에 기존 입력값이 남아있음 -> 제거
 
+    <img src='../image/db011.png' width="750">
+
 - 개발 도중 문제
-    - [ ] DB에 저장된 데이터를 테이블 위젯에서 더블클릭한 뒤 수정않고 추가를 눌러도 새로운 데이터로 삽입되는 문제
-    - [ ] 수정모드에서 추가를 한 뒤 학생번호가 Line Edit에 그대로 존재
+    - [x] DB에 저장된 데이터를 테이블 위젯에서 더블클릭한 뒤 수정않고 추가를 눌러도 새로운 데이터로 삽입되는 문제
+    - [x] 수정모드에서 추가를 한 뒤 학생번호가 Line Edit에 그대로 존재
+
+- 개발 완료 화면
+    - 아이콘 변경 및 추가
+    <img src='../image/db012.png' width="750">
 
 ### 데이터베이스 모델링
 -  서점 데이터 모델링
