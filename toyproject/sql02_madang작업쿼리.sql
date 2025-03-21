@@ -24,4 +24,4 @@ UPDATE MADANG.STUDENTS
  WHERE std_id  	   = :v_std_id
  
  DELETE FROM STUDENTS
-   WHERE std_id  	   = :v_std_id
+   WHERE std_id = :v_std_id
