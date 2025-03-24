@@ -150,7 +150,15 @@ SELECT FIRST_NAME || ' ' || LAST_NAME AS "FULL NAME",
  				   FROM EMPLOYEES
  				  WHERE LAST_NAME = 'Tucker');
 	 
-
-
+-- 문제 12) 부서와 업무별 급여 합계를 구하여서 급여수준 레벨을 지정하고자 함
+--		   부서별, 업무별 급여합계 및 각 부서별 총합, 각 부서별, 업무별 직원 수를 출력하시오.
+SELECT EMPLOYEES.DEPARTMENT_ID, 
+	   EMPLOYEES.JOB_ID, 
+	   TO_CHAR(SUM(EMPLOYEES.SALARY), '$99,999') AS "SUM SALARY", 
+	   COUNT(*) AS "EMPLOYEES CNT"
+  FROM EMPLOYEES
+ GROUP BY ROLLUP(EMPLOYEES.DEPARTMENT_ID , EMPLOYEES.JOB_ID);
+  
+COMMIT;
 
 
