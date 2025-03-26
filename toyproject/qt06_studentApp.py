@@ -36,7 +36,7 @@ class MainWindow(QMainWindow):
         self.btn_mod.setIcon(QIcon('./image/edit-user.png'))
         self.btn_del.setIcon(QIcon('./image/del-user.png'))
 
-        # 버튼 시그널널 추가
+        # 버튼 시그널 추가
         self.btn_add.clicked.connect(self.btnAddClick)
         self.btn_mod.clicked.connect(self.btnModClick)
         self.btn_del.clicked.connect(self.btnDelClick)
@@ -70,7 +70,7 @@ class MainWindow(QMainWindow):
         # 상태바에 메시지 추가
         self.statusbar.showMessage(f'{basic_msg} | 수정모드')
 
-    # 추가버튼 클릭 시그널처리 함수수
+    # 추가버튼 클릭 시그널처리 함수
     def btnAddClick(self):
         # print('추가 버튼 클릭')
         std_id      = self.input_std_id.text()
@@ -205,7 +205,7 @@ class MainWindow(QMainWindow):
             conn.commit() # DB commit 동일 기능
             last_id = cursor.lastrowid # seq_student.currval
             print(last_id)
-            isSucceed = True # 트랜잭션 성공공
+            isSucceed = True # 트랜잭션 성공
             # return True # DB 입력성공!
         except Exception as e:
             print(e)
