@@ -33,17 +33,17 @@ class CustomCalendar(QCalendarWidget):
 class AttendanceApp(QMainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('./miniproject01/출석관리,통계.ui', self)  # UI 파일 로드
+        uic.loadUi('./miniproject01/출석관리,통계.ui', self)
 
         # 기존 UI에서 QCalendarWidget 찾기
         old_calendar = self.findChild(QCalendarWidget, "calendarWidget")  
         if old_calendar:
             # 기존 캘린더를 커스텀 캘린더로 변경
             self.custom_calendar = CustomCalendar(self)
-            self.custom_calendar.setGeometry(old_calendar.geometry())  # 기존 위치 유지
-            self.custom_calendar.setObjectName("calendarWidget")  # 이름 설정
+            self.custom_calendar.setGeometry(old_calendar.geometry())
+            self.custom_calendar.setObjectName("calendarWidget")
             old_calendar.deleteLater()  # 기존 위젯 제거
-            self.layout().addWidget(self.custom_calendar)  # 새 캘린더 추가
+            self.layout().addWidget(self.custom_calendar) 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
