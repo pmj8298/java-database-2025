@@ -47,7 +47,10 @@ CREATE TABLE atd (
     atd_no   NUMBER    PRIMARY KEY,       				  -- 출결 ID (기본키)
     s_no 	 NUMBER    NOT NULL,            			  -- 학생 ID (외래키)
     atd_date DATE      DEFAULT SYSDATE,   				  -- 출석 날짜 (기본값: 오늘 날짜)
-    atd_time TIMESTAMP DEFAULT SYSTIMESTAMP, 		      -- 출석 시간 (기본값: 현재 시간)
+--    leave_time TIMESTAMP DEFAULT SYSTIMESTAMP,   	      -- 조퇴 날짜 (기본값: 오늘 날짜)
+--    atd_time   TIMESTAMP DEFAULT SYSTIMESTAMP, 		      -- 출석 시간 (기본값: 현재 시간)
+--    out_time   TIMESTAMP DEFAULT SYSTIMESTAMP, 		      -- 외출 시간 (기본값: 현재 시간)
+--    in_time    TIMESTAMP DEFAULT SYSTIMESTAMP, 		      -- 복귀 시간 (기본값: 현재 시간)
     status 	 CHAR(1)   CHECK (status IN ('P', 'A', 'L')), -- 출석 상태 ('P': 출석, 'A': 결석, 'L': 지각)
     t_no	 NUMBER,                     				  -- 담당 교사 ID (외래키)
     checkno  VARCHAR2(10),                                -- 출석번호 (교사가 생성한 번호와 비교)
@@ -126,6 +129,23 @@ INCREMENT BY 1;
 --            RAISE_APPLICATION_ERROR(-20001, 'Invalid or expired checkno');
 --    END;
 --END;
+
+
+
+
+
+
+-- INSERT INTO ATTENDANCE.ATD (ATD_NO, S_NO, ATD_DATE, ATD_TIME, T_NO, CHECKNO) VALUES(atd_no_seq.NEXTVAL, 281, SYSDATE, SYSTIMESTAMP, 1, 22);
+
+ALTER TABLE atd
+ADD (
+    leave_time TIMESTAMP DEFAULT SYSTIMESTAMP,         -- 조퇴 시간 (기본값: 현재 시간)
+    out_time  TIMESTAMP DEFAULT SYSTIMESTAMP,          -- 외출 시간 (기본값: 현재 시간)
+    in_time   TIMESTAMP DEFAULT SYSTIMESTAMP           -- 복귀 시간 (기본값: 현재 시간)
+);
+
+
+
 
 
 COMMIT;
