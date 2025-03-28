@@ -12,7 +12,7 @@ username = 'attendance'
 password = '12345'
                                                                                                                                                                                        
 def generate_date_of_birth():
-    year = random.choice([2020, 2021, 2022])
+    year = random.choice([2007, 2008, 2009])
     month = random.randint(1, 12)
     day = random.randint(1, 28)
     return f"{year}-{month:02d}-{day:02d}"
